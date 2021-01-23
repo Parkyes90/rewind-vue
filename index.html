@@ -14,23 +14,31 @@
   </head>
   <body>
     <header>
-      <h1>Vue Events</h1>
+      <h1>Monster Slayer</h1>
     </header>
-    <section id="events">
-      <h2>Events in Action</h2>
-      <button v-on:click="add(5)">Add</button>
-      <button v-on:click.right="add(-5)">Reduce</button>
-      <p>Result: {{ counter }}</p>
-      <input
-        type="text"
-        v-on:input="setName($event, 'Yeseung')"
-        v-on:keyup.enter="confirmInput"
-      />
-      <p>Your Name: {{ confirmedName }}</p>
-      <form v-on:submit.prevent="submitForm">
-        <input type="text" />
-        <button>Sign Up</button>
-      </form>
-    </section>
+    <div id="game">
+      <section id="monster" class="container">
+        <h2>Monster Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value"></div>
+        </div>
+      </section>
+      <section id="player" class="container">
+        <h2>Your Health</h2>
+        <div class="healthbar">
+          <div class="healthbar__value"></div>
+        </div>
+      </section>
+      <section id="controls">
+        <button>ATTACK</button>
+        <button>SPECIAL ATTACK</button>
+        <button>HEAL</button>
+        <button>SURRENDER</button>
+      </section>
+      <section id="log" class="container">
+        <h2>Battle Log</h2>
+        <ul></ul>
+      </section>
+    </div>
   </body>
 </html>
