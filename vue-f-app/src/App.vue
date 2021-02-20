@@ -9,10 +9,9 @@
         is-favorite="1"
       />
       <friend-contact
-        name="parkyes90"
+        name="parkyes91"
         phone-number="123123"
         email-address="parkyes90@gmail.com"
-        is-favorite="0"
       />
     </ul>
   </section>
