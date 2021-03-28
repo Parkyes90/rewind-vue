@@ -4,12 +4,10 @@
 </template>
 
 <script>
-import StoredResources from '@/components/learning-resources/StoredResources';
 import TheHeader from '@/components/layouts/TheHeader';
 export default {
   components: {
     TheHeader,
-    StoredResources,
   },
   data() {
     return {
