@@ -1,11 +1,14 @@
 <template>
+  <the-header title="Remember Me"></the-header>
   <stored-resources :resources="storedResources"></stored-resources>
 </template>
 
 <script>
 import StoredResources from '@/components/learning-resources/StoredResources';
+import TheHeader from '@/components/layouts/TheHeader';
 export default {
   components: {
+    TheHeader,
     StoredResources,
   },
   data() {
