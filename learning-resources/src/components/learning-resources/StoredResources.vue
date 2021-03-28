@@ -13,10 +13,10 @@
 <script>
 import LearningResource from '@/components/learning-resources/LearningResource';
 export default {
+  inject: ['resources'],
   components: {
     LearningResource,
   },
-  props: ['resources'],
 };
 </script>
 
