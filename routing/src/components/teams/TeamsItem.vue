@@ -16,6 +16,9 @@ export default {
         params: {
           teamId: this.id,
         },
+        query: {
+          sort: 'asc',
+        },
       };
     },
   },
