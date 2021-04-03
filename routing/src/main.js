@@ -4,9 +4,15 @@ import App from './App.vue';
 import TeamMembers from '@/components/teams/TeamMembers';
 import TeamsList from '@/components/teams/TeamsList';
 import UsersList from '@/components/users/UsersList';
+import NotFound from '@/components/nav/NotFound';
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: '/',
+      redirect: '/teams',
+    },
     {
       path: '/teams',
       component: TeamsList,
@@ -16,6 +22,7 @@ const router = createRouter({
       component: UsersList,
     },
     { path: '/teams/:teamId', component: TeamMembers, props: true },
+    { path: '/:notFound(.*)', component: NotFound },
   ],
   linkActiveClass: 'active',
 });
