@@ -54,6 +54,11 @@ const router = createRouter({
 // next();
 // });
 
+router.afterEach((to, from) => {
+  console.log(to, from);
+  console.log('after each');
+});
+
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
