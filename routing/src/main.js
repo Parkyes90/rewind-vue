@@ -37,14 +37,23 @@ const router = createRouter({
         default: UsersList,
         footer: UsersFooter,
       },
+      beforeEnter(to, from, next) {
+        console.log(to, from);
+        next();
+      },
     },
     { path: '/:notFound(.*)', component: NotFound },
   ],
   linkActiveClass: 'active',
-  scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition);
-  },
+  // scrollBehavior(to, from, savedPosition) {
+  // console.log(to, from, savedPosition);
+  // },
 });
+// router.beforeEach((to, from, next) => {
+// console.log(to, from, next);
+// next();
+// });
+
 const app = createApp(App);
 app.use(router);
 app.mount('#app');

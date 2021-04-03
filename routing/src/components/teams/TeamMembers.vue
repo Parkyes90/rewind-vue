@@ -40,6 +40,10 @@ export default {
   created() {
     this.loadTeamMembers(this.teamId);
   },
+  beforeRouteUpdate(to, from, next) {
+    console.log('Team members before route update');
+    next();
+  },
   watch: {
     teamId(newTeamId) {
       this.loadTeamMembers(newTeamId);
