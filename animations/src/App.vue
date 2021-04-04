@@ -4,12 +4,12 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition>
+    <transition name="para">
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
     </transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
@@ -89,33 +89,33 @@ button:active {
   animation: slide-fade 0.3s ease-out forwards;
 }
 
-.v-enter-from {
-  opacity: 0;
-  transform: translateY(-30px);
+/*.v-enter-from {*/
+/*  opacity: 0;*/
+/*  transform: translateY(-30px);*/
+/*}*/
+
+.para-enter-active {
+  animation: slide-fade 0.3s ease-out;
 }
 
-.v-enter-active {
-  transition: all 0.3s ease-out;
+/*.v-enter-to {*/
+/*  opacity: 1;*/
+/*  transform: translateY(0);*/
+/*}*/
+
+/*.v-leave-from {*/
+/*  opacity: 1;*/
+/*  transform: translateY(0);*/
+/*}*/
+
+.para-leave-active {
+  animation: slide-fade 0.3s ease-in;
 }
 
-.v-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.v-leave-from {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.v-leave-active {
-  transition: all 0.3s ease-in;
-}
-
-.v-leave-to {
-  opacity: 1;
-  transform: translateY(-30px);
-}
+/*.v-leave-to {*/
+/*  opacity: 1;*/
+/*  transform: translateY(-30px);*/
+/*}*/
 
 @keyframes slide-fade {
   0% {
