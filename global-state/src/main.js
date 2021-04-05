@@ -7,6 +7,11 @@ const store = createStore({
       counter: 0,
     };
   },
+  mutations: {
+    increment(state) {
+      state.counter = state.counter + 2;
+    },
+  },
 });
 
 import App from './App.vue';
