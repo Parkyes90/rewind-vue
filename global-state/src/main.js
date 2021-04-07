@@ -15,7 +15,7 @@ const store = createStore({
   actions: {
     increment(context, payload) {
       setTimeout(() => {
-        context.commit(payload);
+        context.commit('increment', payload);
       }, 2000);
     },
   },
