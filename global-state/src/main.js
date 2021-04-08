@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import { createStore } from 'vuex';
 
 const counterModule = {
+  namespaced: true,
   state() {
     return {
       counter: 0,
@@ -20,6 +21,9 @@ const counterModule = {
     },
   },
   getters: {
+    testAuth(state, getters, rootState) {
+      return rootState.isLoggedIn;
+    },
     finalCounter(state) {
       return state.counter * 2;
     },

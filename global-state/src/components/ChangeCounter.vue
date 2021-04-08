@@ -6,7 +6,7 @@
 import { mapActions } from 'vuex';
 export default {
   methods: {
-    ...mapActions(['increment']),
+    ...mapActions('numbers', ['increment']),
   },
 };
 </script>

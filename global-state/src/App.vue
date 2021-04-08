@@ -28,7 +28,7 @@ export default {
   methods: {
     addOne() {
       this.$store.dispatch({
-        type: 'increment',
+        type: 'numbers/increment',
         value: 2,
       });
     },
