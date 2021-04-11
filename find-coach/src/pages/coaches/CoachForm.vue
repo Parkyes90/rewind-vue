@@ -40,6 +40,7 @@
 <script>
 import BaseButton from '@/components/ui/BaseButton';
 export default {
+  emits: ['save-data'],
   components: { BaseButton },
   data() {
     return {
@@ -52,14 +53,21 @@ export default {
   },
   methods: {
     submitForm() {
+      const {
+        firstName,
+        lastName,
+        description,
+        areas,
+        rate: hourlyRate,
+      } = this;
       const formData = {
-        first: this.firstName,
-        last: this.lastName,
-        desc: this.description,
-        rate: this.rate,
-        areas: this.areas,
+        firstName,
+        lastName,
+        description,
+        hourlyRate,
+        areas,
       };
-      console.log(formData);
+      this.$emit('save-data', formData);
     },
   },
 };

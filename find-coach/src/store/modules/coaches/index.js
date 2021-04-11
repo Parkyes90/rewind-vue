@@ -8,6 +8,7 @@ export default {
       coaches: [
         {
           id: 'c1',
+          userId: 'gavin1',
           firstName: 'Maximilian',
           lastName: 'Schwarzm체ller',
           areas: ['frontend', 'backend', 'career'],
@@ -17,6 +18,7 @@ export default {
         },
         {
           id: 'c2',
+          userId: 'gavin2',
           firstName: 'Julie',
           lastName: 'Jones',
           areas: ['frontend', 'career'],

@@ -6,6 +6,16 @@ const store = createStore({
     coaches,
     requests,
   },
+  state() {
+    return {
+      userId: 'gavin',
+    };
+  },
+  getters: {
+    userId(state) {
+      return state.userId;
+    },
+  },
 });
 
 export default store;
