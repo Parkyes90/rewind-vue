@@ -129,17 +129,13 @@ export default {
       this.formFields[field].isValid = this.validateField(field);
     },
     validateField(field) {
-      if (field === 'areas' && this.formFields[field].val.length === 0) {
-        return false;
-      } else if (
-        field === 'rate' &&
-        !this.formFields[field].val &&
-        this.formFields[field].val < 0
-      ) {
-        return false;
-      } else {
-        return !!this.formFields[field].val;
+      if (field === 'areas') {
+        return this.formFields[field].val.length !== 0;
       }
+      if (field === 'rate') {
+        return !(!this.formFields[field].val || this.formFields[field].val < 0);
+      }
+      return !!this.formFields[field].val;
     },
     validateForm() {
       let states = [];
