@@ -9,6 +9,7 @@
         type="text"
         id="first-name"
         v-model.trim="formFields.firstName.val"
+        @blur="clearValidity('firstName')"
       />
       <p v-if="!formFields.firstName.isValid">FirstName must not be empty.</p>
     </div>
@@ -21,6 +22,7 @@
         type="text"
         id="last-name"
         v-model.trim="formFields.lastName.val"
+        @blur="clearValidity('lastName')"
       />
       <p v-if="!formFields.lastName.isValid">LastName must not be empty.</p>
     </div>
@@ -33,6 +35,7 @@
         rows="5"
         id="description"
         v-model="formFields.description.val"
+        @blur="clearValidity('description')"
       />
       <p v-if="!formFields.description.isValid">
         Description must not be empty.
@@ -40,7 +43,12 @@
     </div>
     <div class="form-control" :class="{ invalid: !formFields.rate.isValid }">
       <label for="rate">Hourly Rate</label>
-      <input type="number" id="rate" v-model.number="formFields.rate.val" />
+      <input
+        type="number"
+        id="rate"
+        v-model.number="formFields.rate.val"
+        @blur="clearValidity('rate')"
+      />
       <p v-if="!formFields.rate.isValid">Rate must be greater then 0.</p>
     </div>
     <div class="form-control" :class="{ invalid: !formFields.areas.isValid }">
@@ -51,6 +59,7 @@
           id="frontend"
           value="frontend"
           v-model="formFields.areas.val"
+          @blur="clearValidity('areas')"
         />
         <label for="frontend">Frontend Development</label>
       </div>
@@ -60,6 +69,7 @@
           id="backend"
           value="backend"
           v-model="formFields.areas.val"
+          @blur="clearValidity('areas')"
         />
         <label for="backend">Backend Development</label>
       </div>
@@ -69,6 +79,7 @@
           id="career"
           value="career"
           v-model="formFields.areas.val"
+          @blur="clearValidity('areas')"
         />
         <label for="frontend">Career Advisory</label>
       </div>
@@ -114,21 +125,26 @@ export default {
     };
   },
   methods: {
+    clearValidity(field) {
+      this.formFields[field].isValid = this.validateField(field);
+    },
+    validateField(field) {
+      if (field === 'areas' && this.formFields[field].val.length === 0) {
+        return false;
+      } else if (
+        field === 'rate' &&
+        !this.formFields[field].val &&
+        this.formFields[field].val < 0
+      ) {
+        return false;
+      } else {
+        return !!this.formFields[field].val;
+      }
+    },
     validateForm() {
       let states = [];
       Object.keys(this.formFields).forEach((field) => {
-        let isValid;
-        if (field === 'areas' && this.formFields[field].val.length === 0) {
-          isValid = false;
-        } else if (
-          field === 'rate' &&
-          !this.formFields[field].val &&
-          this.formFields[field].val < 0
-        ) {
-          isValid = false;
-        } else {
-          isValid = !!this.formFields[field].val;
-        }
+        const isValid = this.validateField(field);
         this.formFields[field].isValid = isValid;
         states.push(isValid);
       });
@@ -139,7 +155,6 @@ export default {
       if (!this.formIsValid) {
         throw Error('Invalid Form Data');
       }
-      console.log(this.formFields);
       const {
         firstName,
         lastName,
@@ -154,7 +169,6 @@ export default {
         hourlyRate: hourlyRate.val,
         areas: areas.val,
       };
-      console.log(formData);
       this.$emit('save-data', formData);
     },
   },
