@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div>
+    <div class="form-control">
       <label for="email">Your Email</label>
       <input type="email" id="email" v-model.trim="email" />
     </div>
-    <div>
+    <div class="form-control">
       <label for="message">Message</label>
       <textarea id="message" rows="5" v-model.trim="message"></textarea>
     </div>
@@ -29,10 +29,23 @@ export default {
   methods: {
     submitForm() {
       this.formIsValid = true;
-      if (!this.email || !this.email.includes('@') || !this.message) {
+      const {
+        email,
+        message,
+        $route: {
+          params: { id: coachId },
+        },
+      } = this;
+      if (!email || !email.includes('@') || !message) {
         this.formIsValid = false;
         throw Error('Invalid Form');
       }
+      this.$store.dispatch('requests/contactCoach', {
+        email,
+        message,
+        coachId,
+      });
+      this.$router.replace('/coaches');
     },
   },
 };
