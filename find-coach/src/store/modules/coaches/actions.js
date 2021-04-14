@@ -15,4 +15,18 @@ export default {
         console.log(err);
       });
   },
+  loadCoaches(context) {
+    fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
+      .then((res) => res.json())
+      .then((json) => {
+        const coaches = Object.keys(json).map((key) => ({
+          id: key,
+          ...json[key],
+        }));
+        context.commit('setCoaches', coaches);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
