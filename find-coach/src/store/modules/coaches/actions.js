@@ -15,8 +15,8 @@ export default {
         console.log(err);
       });
   },
-  loadCoaches(context) {
-    fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
+  async loadCoaches(context) {
+    await fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
       .then((res) => res.json())
       .then((json) => {
         const coaches = Object.keys(json).map((key) => ({
@@ -26,7 +26,7 @@ export default {
         context.commit('setCoaches', coaches);
       })
       .catch((err) => {
-        console.log(err);
+        throw new Error(err.message || 'Failed to fetch!');
       });
   },
 };
