@@ -15,18 +15,21 @@ export default {
         console.log(err);
       });
   },
-  async loadCoaches(context) {
-    await fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
-      .then((res) => res.json())
-      .then((json) => {
-        const coaches = Object.keys(json).map((key) => ({
-          id: key,
-          ...json[key],
-        }));
-        context.commit('setCoaches', coaches);
-      })
-      .catch((err) => {
-        throw new Error(err.message || 'Failed to fetch!');
-      });
+  async loadCoaches(context, payload) {
+    if (payload.forceRefresh || context.getters.shouldUpdate) {
+      await fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
+        .then((res) => res.json())
+        .then((json) => {
+          const coaches = Object.keys(json).map((key) => ({
+            id: key,
+            ...json[key],
+          }));
+          context.commit('setCoaches', coaches);
+          context.commit('setFetchTimeStamp');
+        })
+        .catch((err) => {
+          throw new Error(err.message || 'Failed to fetch!');
+        });
+    }
   },
 };
