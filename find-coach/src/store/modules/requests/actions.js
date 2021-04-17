@@ -1,3 +1,5 @@
+import { handleError } from '@/utils/errors';
+
 export default {
   async contactCoach(context, payload) {
     const newRequest = { ...payload };
@@ -23,6 +25,9 @@ export default {
         `https://vuejs-http-96326.firebaseio.com/requests/${coachId}.json`
       );
       const responseData = await response.json();
+      if (!response.ok) {
+        handleError(responseData.error);
+      }
       context.commit(
         'setRequests',
         Object.keys(responseData).map((key) => {
@@ -30,7 +35,7 @@ export default {
         })
       );
     } catch (e) {
-      throw new Error(e.message || 'Failed to fetch requests');
+      handleError(e.message || 'Failed to fetch requests');
     }
   },
 };

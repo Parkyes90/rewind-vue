@@ -54,7 +54,7 @@ export default {
     async loadRequests() {
       this.isLoading = true;
       try {
-        this.$store.dispatch('requests/fetchRequests');
+        await this.$store.dispatch('requests/fetchRequests');
       } catch (e) {
         this.error = e.message || 'Something failed';
       }
