@@ -17,11 +17,10 @@ export default {
     if (!response.ok) {
       throw new Error(responseData.message || 'Failed to authenticate.');
     }
-    console.log(responseData);
     const {
       idToken: token,
       localId: userId,
-      expireIn: tokenExpiration,
+      expiresIn: tokenExpiration,
     } = responseData;
     context.commit('setUser', {
       token,
@@ -45,7 +44,6 @@ export default {
     if (!response.ok) {
       throw new Error(responseData.message || 'Failed to authenticate.');
     }
-    console.log(responseData);
     const {
       idToken: token,
       localId: userId,

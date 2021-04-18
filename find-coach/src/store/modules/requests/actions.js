@@ -20,9 +20,10 @@ export default {
   },
   async fetchRequests(context) {
     const coachId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     try {
       const response = await fetch(
-        `https://vuejs-http-96326.firebaseio.com/requests/${coachId}.json`
+        `https://vuejs-http-96326.firebaseio.com/requests/${coachId}.json?auth=${token}`
       );
       const responseData = await response.json();
       if (!response.ok) {

@@ -5,10 +5,15 @@ export default {
       userId,
       ...data,
     };
-    fetch(`https://vuejs-http-96326.firebaseio.com/coaches/${userId}.json`, {
-      method: 'PUT',
-      body: JSON.stringify(coach),
-    })
+    const token = context.rootGetters.token;
+
+    fetch(
+      `https://vuejs-http-96326.firebaseio.com/coaches/${userId}.json?auth=${token}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(coach),
+      }
+    )
       .then((res) => res.json())
       .then((json) => context.commit('registerCoach', { id: userId, ...json }))
       .catch((err) => {
@@ -16,8 +21,11 @@ export default {
       });
   },
   async loadCoaches(context, payload) {
+    const token = context.rootGetters.token;
     if (payload.forceRefresh || context.getters.shouldUpdate) {
-      await fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
+      await fetch(
+        `https://vuejs-http-96326.firebaseio.com/coaches.json?auth=${token}`
+      )
         .then((res) => res.json())
         .then((json) => {
           const coaches = Object.keys(json).map((key) => ({
