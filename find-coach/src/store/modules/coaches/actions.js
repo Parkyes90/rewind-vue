@@ -21,11 +21,8 @@ export default {
       });
   },
   async loadCoaches(context, payload) {
-    const token = context.rootGetters.token;
     if (payload.forceRefresh || context.getters.shouldUpdate) {
-      await fetch(
-        `https://vuejs-http-96326.firebaseio.com/coaches.json?auth=${token}`
-      )
+      await fetch(`https://vuejs-http-96326.firebaseio.com/coaches.json`)
         .then((res) => res.json())
         .then((json) => {
           const coaches = Object.keys(json).map((key) => ({
