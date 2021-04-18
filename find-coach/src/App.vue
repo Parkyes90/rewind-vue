@@ -12,6 +12,9 @@
 import TheHeader from '@/components/layouts/TheHeader';
 export default {
   components: { TheHeader },
+  created() {
+    this.$store.dispatch('tryLogin');
+  },
 };
 </script>
 
