@@ -74,10 +74,15 @@ export default {
       this.validateForm();
       if (this.formIsValid) {
         try {
-          await this.$store.dispatch('signUp', {
+          const payload = {
             email: this.email,
             password: this.password,
-          });
+          };
+          if (this.mode === AUTH_MODE.LOGIN.value) {
+            await this.$store.dispatch('login', payload);
+          } else {
+            await this.$store.dispatch('signUp', payload);
+          }
         } catch (e) {
           this.error = e.message || 'Failed to authenticate, try later.';
         }
