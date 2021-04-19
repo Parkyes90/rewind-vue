@@ -1,18 +1,42 @@
+import { defineAsyncComponent } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
-import CoachDetail from '@/pages/coaches/CoachDetail';
-import CoachesList from '@/pages/coaches/CoachesList';
-import CoachRegister from '@/pages/coaches/CoachRegister';
-import ContactCoach from '@/pages/requests/ContactCoach';
-import RequestReceived from '@/pages/requests/RequestReceived';
-import NotFound from '@/pages/NotFound';
-import UserAuth from '@/pages/auth/UserAuth';
 import store from './store';
+
+const CoachDetail = defineAsyncComponent(() =>
+  import('./pages/coaches/CoachDetail.vue')
+);
+
+const CoachesList = defineAsyncComponent(() =>
+  import('./pages/coaches/CoachesList.vue')
+);
+
+const CoachRegister = defineAsyncComponent(() =>
+  import('./pages/coaches/CoachRegister.vue')
+);
+
+const RequestReceived = defineAsyncComponent(() =>
+  import('./pages/requests/RequestReceived.vue')
+);
+
+const ContactCoach = defineAsyncComponent(() =>
+  import('./pages/requests/ContactCoach.vue')
+);
+
+const UserAuth = defineAsyncComponent(() =>
+  import('./pages/auth/UserAuth.vue')
+);
+
+const NotFound = defineAsyncComponent(() => import('./pages/NotFound.vue'));
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', redirect: '/coaches' },
 
-    { path: '/coaches', component: CoachesList },
+    {
+      path: '/coaches',
+      component: CoachesList,
+    },
     {
       path: '/coaches/:id',
       component: CoachDetail,
