@@ -12,4 +12,4 @@ export const AUTH_MODE = {
   LOGIN,
 };
 
-export const WEB_API_KEY = process.env.WEB_API_KEY;
+export const WEB_API_KEY = 'AIzaSyArowGddGPOcLrQL7Ug7hqecMDHR5wplyM';
