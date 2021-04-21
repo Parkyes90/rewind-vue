@@ -4,8 +4,8 @@
     <h2>{{ user.age }}</h2>
     <button @click="setNewAge">Set Age</button>
     <div>
-      <input type="text" @input="setFirstName" />
-      <input type="text" @input="setLastName" />
+      <input type="text" v-model="lastName" />
+      <input type="text" v-model="firstName" />
     </div>
     <div>name: {{ name }}</div>
   </section>
@@ -31,15 +31,7 @@ export default {
       return `${firstName.value} ${lastName.value}`;
     });
 
-    const setFirstName = (event) => {
-      firstName.value = event.target.value;
-    };
-
-    const setLastName = (event) => {
-      lastName.value = event.target.value;
-    };
-
-    return { user, setNewAge, setFirstName, setLastName, name };
+    return { user, setNewAge, firstName, lastName, name };
   },
 };
 </script>
