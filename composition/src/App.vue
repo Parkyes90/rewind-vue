@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
 
 export default {
   setup() {
@@ -22,7 +22,9 @@ export default {
     });
     const firstName = ref('');
     const lastName = ref('');
-
+    watch([firstName, lastName], (oldVals, newVals) => {
+      console.log('changed', oldVals, newVals);
+    });
     const setNewAge = () => {
       user.age = 32;
     };
