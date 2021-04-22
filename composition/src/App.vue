@@ -4,8 +4,9 @@
     <h2>{{ user.age }}</h2>
     <button @click="setNewAge">Set Age</button>
     <div>
-      <input type="text" v-model="lastName" />
+      <input type="text" v-model="lastName" ref="lastNameInput" />
       <input type="text" v-model="firstName" />
+      <button @click="setLastName">SetLastName</button>
     </div>
     <div>name: {{ name }}</div>
   </section>
@@ -22,6 +23,7 @@ export default {
     });
     const firstName = ref('');
     const lastName = ref('');
+    const lastNameInput = ref(null);
     watch([firstName, lastName], (oldVals, newVals) => {
       console.log('changed', oldVals, newVals);
     });
@@ -33,7 +35,19 @@ export default {
       return `${firstName.value} ${lastName.value}`;
     });
 
-    return { user, setNewAge, firstName, lastName, name };
+    const setLastName = () => {
+      lastName.value = lastNameInput.value.value;
+    };
+
+    return {
+      user,
+      setNewAge,
+      firstName,
+      lastName,
+      name,
+      lastNameInput,
+      setLastName,
+    };
   },
 };
 </script>
