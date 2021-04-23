@@ -16,7 +16,19 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watch, provide } from 'vue';
+import {
+  ref,
+  reactive,
+  computed,
+  watch,
+  provide,
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+} from 'vue';
 import UserData from '@/components/UserData';
 export default {
   components: { UserData },
@@ -44,6 +56,26 @@ export default {
     };
 
     provide('userAge', user.age);
+
+    onBeforeMount(() => {
+      console.log('onBeforeMount');
+    });
+    onMounted(() => {
+      console.log('onMounted');
+    });
+    onBeforeUpdate(() => {
+      console.log('onBeforeUpdate');
+    });
+    onUpdated(() => {
+      console.log('onUpdated');
+    });
+    onBeforeUnmount(() => {
+      console.log('onBeforeUnmount');
+    });
+
+    onUnmounted(() => {
+      console.log('onUnmounted');
+    });
 
     return {
       user,
