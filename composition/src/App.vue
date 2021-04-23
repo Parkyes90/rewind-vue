@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch, provide } from 'vue';
 import UserData from '@/components/UserData';
 export default {
   components: { UserData },
@@ -42,6 +42,8 @@ export default {
     const setLastName = () => {
       lastName.value = lastNameInput.value.value;
     };
+
+    provide('userAge', user.age);
 
     return {
       user,
