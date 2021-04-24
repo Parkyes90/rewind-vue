@@ -54,7 +54,7 @@ export default {
 
     const displayedUsers = computed(() => {
       if (!sorting.value) {
-        return availableUsers;
+        return availableUsers.value;
       }
       return availableUsers.value.slice().sort((u1, u2) => {
         if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
