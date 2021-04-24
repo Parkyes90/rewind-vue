@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, toRefs } from 'vue';
 import ProjectItem from './ProjectItem.vue';
 
 export default {
@@ -55,7 +55,9 @@ export default {
         }
       }, 300);
     });
-    watch(props.user, () => {
+    const { user } = toRefs(props);
+
+    watch(user, () => {
       enteredSearchTerm.value = '';
     });
     return {
