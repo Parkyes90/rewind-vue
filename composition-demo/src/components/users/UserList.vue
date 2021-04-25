@@ -28,6 +28,7 @@
 <script>
 import { ref, computed, watch } from 'vue';
 import UserItem from './UserItem.vue';
+import { useSearch } from '@/hooks/useSearch';
 
 export default {
   components: {
@@ -36,27 +37,18 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
-    const enteredSearchTerm = ref('');
+    const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
+      props.users,
+      'fullName'
+    );
     const activeSearchTerm = ref('');
     const sorting = ref(null);
 
-    const availableUsers = computed(() => {
-      let users = [];
-      if (activeSearchTerm.value) {
-        users = props.users.filter((usr) =>
-          usr.fullName.includes(activeSearchTerm.value)
-        );
-      } else if (props.users) {
-        users = props.users;
-      }
-      return users;
-    });
-
     const displayedUsers = computed(() => {
       if (!sorting.value) {
-        return availableUsers.value;
+        return availableItems.value;
       }
-      return availableUsers.value.slice().sort((u1, u2) => {
+      return availableItems.value.slice().sort((u1, u2) => {
         if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
           return 1;
         } else if (sorting.value === 'asc') {
@@ -68,10 +60,6 @@ export default {
         }
       });
     });
-
-    const updateSearch = (val) => {
-      enteredSearchTerm.value = val;
-    };
 
     const sort = (mode) => {
       sorting.value = mode;
@@ -86,9 +74,7 @@ export default {
     });
     return {
       enteredSearchTerm,
-      activeSearchTerm,
       sorting,
-      availableUsers,
       displayedUsers,
       updateSearch,
       sort,
