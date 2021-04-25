@@ -26,9 +26,10 @@
 </template>
 
 <script>
-import { ref, computed, watch, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import UserItem from './UserItem.vue';
 import { useSearch } from '@/hooks/useSearch';
+import { useSort } from '@/hooks/useSort';
 
 export default {
   components: {
@@ -42,37 +43,8 @@ export default {
       users,
       'fullName'
     );
-    const activeSearchTerm = ref('');
-    const sorting = ref(null);
+    const { sort, displayedUsers, sorting } = useSort(availableItems);
 
-    const displayedUsers = computed(() => {
-      if (!sorting.value) {
-        return availableItems.value;
-      }
-      return availableItems.value.slice().sort((u1, u2) => {
-        if (sorting.value === 'asc' && u1.fullName > u2.fullName) {
-          return 1;
-        } else if (sorting.value === 'asc') {
-          return -1;
-        } else if (sorting.value === 'desc' && u1.fullName > u2.fullName) {
-          return -1;
-        } else {
-          return 1;
-        }
-      });
-    });
-
-    const sort = (mode) => {
-      sorting.value = mode;
-    };
-
-    watch(enteredSearchTerm, (val) => {
-      setTimeout(() => {
-        if (val === enteredSearchTerm.value) {
-          activeSearchTerm.value = val;
-        }
-      }, 300);
-    });
     return {
       enteredSearchTerm,
       sorting,

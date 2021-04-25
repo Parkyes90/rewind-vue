@@ -46,16 +46,8 @@ export default {
       return projects.value && availableItems.value.length > 0;
     });
 
-    watch(enteredSearchTerm, (val) => {
-      setTimeout(() => {
-        if (val === enteredSearchTerm.value) {
-          activeSearchTerm.value = val;
-        }
-      }, 300);
-    });
-
     watch(user, () => {
-      enteredSearchTerm.value = '';
+      updateSearch('');
     });
     return {
       enteredSearchTerm,
