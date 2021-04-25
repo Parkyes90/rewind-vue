@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, toRefs } from 'vue';
 import UserItem from './UserItem.vue';
 import { useSearch } from '@/hooks/useSearch';
 
@@ -37,8 +37,9 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
+    const { users } = toRefs(props);
     const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
-      props.users,
+      users,
       'fullName'
     );
     const activeSearchTerm = ref('');

@@ -7,11 +7,11 @@ export const useSearch = (items, searchProp) => {
   const availableItems = computed(() => {
     let filterItems = [];
     if (activeSearchTerm.value) {
-      filterItems = items.filter((item) =>
+      filterItems = items.value.filter((item) =>
         item[searchProp].includes(activeSearchTerm.value)
       );
-    } else if (items) {
-      filterItems = items;
+    } else if (items.value) {
+      filterItems = items.value;
     }
     return filterItems;
   });
